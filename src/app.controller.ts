@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Logger, Body } from '@nestjs/common';
+import { Controller, Get, Post, Logger, Body, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller('app')
@@ -14,6 +14,7 @@ export class AppController {
   }
 
   @Post()
+  @HttpCode(HttpStatus.OK)
   public async postHook(@Body() json: any): Promise<string> {
     this._logger.log(`...Logging json from hook ${JSON.stringify(json)}`);
     this.postData = JSON.stringify(json);
